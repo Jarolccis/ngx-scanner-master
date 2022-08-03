@@ -1,0 +1,166 @@
+<div class="container">
+  <div class="d-flex justify-content-center">
+    <img
+      src="https://s3-bucket-jarol.s3.amazonaws.com/LogoTottus.jpg"
+      class="card-img-top eye"
+      style="width: 125px; padding: 8px 0 16px 0"
+    />
+  </div>
+
+  <p class="title">Consulta precio</p>
+  <p class="subtitle" *ngIf="!isResult && hasPermission">Enfoca el código de barras del producto</p>
+  
+
+  <!-- <div class="input-group ">
+    <input
+      [formControl]="search"
+      type="text"
+      class="form-control rounded"
+      placeholder="Buscar producto"
+      aria-label="Search"
+      aria-describedby="search-addon"
+      id="searchB"
+    />
+    <button
+      *ngIf="!isLoading"
+      type="button"
+      class="btn btn-success"
+      (click)="searchProduct()"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-search"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+        />
+      </svg>
+    </button>
+
+    <button *ngIf="isLoading" class="btn btn-success" type="button" disabled>
+      <span
+        class="spinner-border spinner-border-sm"
+        role="status"
+        aria-hidden="true"
+      ></span>
+      <span class="sr-only"> </span>
+    </button>
+  </div> -->
+  <br />
+  <div  class="border rounded text-center titleResult pt-2"  *ngIf="isResult && isMsg" style="background-color: #F5F5F5;" >
+    <p class="card-title titleCard"> <strong> {{ nameProduct }}</strong>  </p>
+    <p class="card-title titleCard"> MARCA {{ marca }}  </p>
+    <p class="card-title titleCard"*ngIf="isPriceEQ"> <strong> Precio:</strong> S/{{ precio }}  </p>
+    <p class="card-title titleCard"*ngIf="!isPriceEQ"> <strong> Precio Oferta:</strong> S/{{ this.precioCRM }}  </p>
+    <p class="card-title titleCard"*ngIf="!isPriceEQ"> <strong> Precio Regular:</strong> S/{{ precio }}  </p>
+
+
+  </div>
+  <br />
+  <p class="subtitleHeader" *ngIf="isResult && !isMsg" >{{msgHeader}}</p>
+  <p class="subtitle" *ngIf="isResult" >{{msg}}</p>
+  <div class="scanner-shell" [hidden]="!hasDevices">
+    <!-- <mat-menu #appMenu="matMenu">
+      <mat-selection-list>
+        <mat-list-option
+          checkboxPosition="start"
+          (click)="toggleTryHarder()"
+          [selected]="tryHarder"
+        >
+          Enable Try-harder
+        </mat-list-option>
+        <mat-list-option
+          checkboxPosition="start"
+          (click)="toggleTorch()"
+          [selected]="torchEnabled"
+          *ngIf="torchAvailable$ | async"
+        >
+          Enable Torch
+        </mat-list-option>
+      </mat-selection-list>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="openFormatsDialog()">
+        Barcode formats
+      </button>
+      <button mat-menu-item (click)="openInfoDialog()">App info</button>
+    </mat-menu> -->
+
+    <!-- <header>
+      <mat-form-field appearance="fill">
+        <mat-select
+          [value]="deviceSelected"
+          (valueChange)="onDeviceSelectChange($event)"
+        >
+          <mat-option value="">No Device Selected</mat-option>
+          <mat-option
+            *ngFor="let device of availableDevices"
+            [value]="device.deviceId"
+            >{{ device.label }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <button mat-icon-button [matMenuTriggerFor]="appMenu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </header> -->
+
+    <zxing-scanner
+      [torch]="torchEnabled"
+      [device]="deviceCurrent"
+      (deviceChange)="onDeviceChange($event)"
+      (scanSuccess)="onCodeResult($event)"
+      [formats]="formatsEnabled"
+      [tryHarder]="tryHarder"
+      (permissionResponse)="onHasPermission($event)"
+      (camerasFound)="onCamerasFound($event)"
+      (torchCompatible)="onTorchCompatible($event)"
+    ></zxing-scanner>
+
+    <section class="results" *ngIf="qrResultString">
+      <div>
+        <small>Ean</small>
+        <strong>{{ qrResultString }}</strong>
+      </div>
+      <button mat-icon-button (click)="clearResult()">&times;</button>
+    </section>
+  </div>
+
+  <!-- <input matInput type="text" [(ngModel)]="qrResultString" /> -->
+
+  <ng-container *ngIf="hasPermission === undefined">
+    <h2>Waiting for permissions.</h2>
+
+    <blockquote>
+      If your device does not has cameras, no permissions will be asked.
+    </blockquote>
+  </ng-container>
+
+  <ng-container *ngIf="hasPermission === false">
+    <h2 class="subtitle">
+      Actualiza esta página y permítenos utilizar tu cámara para escanear el código de barras del producto
+      <br/>
+      <br/>
+      <img src="https://i.ytimg.com/vi/w6geNk3QnBQ/maxresdefault.jpg"  style="width: 100%;">
+    </h2>
+  </ng-container>
+
+  <ng-container *ngIf="hasDevices === undefined">
+    <h2>Couldn't check for devices.</h2>
+
+    <blockquote>This may be caused by some security error.</blockquote>
+  </ng-container>
+
+  <ng-container *ngIf="hasDevices === false">
+    <h2>No devices were found.</h2>
+
+    <blockquote>
+      I believe your device has no media devices attached to.
+    </blockquote>
+  </ng-container>
+  <h2>Jarol</h2>
+</div>
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
