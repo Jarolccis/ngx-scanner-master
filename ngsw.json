@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1659500947977,
+  "timestamp": 1659501499244,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main.b1e992c1c9406129.js",
+        "/main.848fe4def230efb1.js",
         "/manifest.webmanifest",
         "/polyfills.72d51ca2477f8cc4.js",
         "/runtime.de0da83d116d6440.js",
@@ -61,8 +61,8 @@
     "/assets/icons/mstile-150x150.png": "97db6b63f6214367fa49e266add632bc8af3f5a4",
     "/assets/icons/safari-pinned-tab.svg": "03d482e5aa20cb76842fcf984d28cd65c0423987",
     "/favicon.ico": "a2eaf72bbac9bea51761890d3665734f0bc390f4",
-    "/index.html": "6895f228bb1cdb1c2dd67b996a1bb11e4bd60760",
-    "/main.b1e992c1c9406129.js": "98020b0b943c030b52a42d2aeadb6221e7c474d1",
+    "/index.html": "02a97c1318eb9fda0673eb5ff4a58f734a48ab1e",
+    "/main.848fe4def230efb1.js": "2ed9037a0554865b949cf8648e6828b4e4b6048e",
     "/manifest.webmanifest": "51807fd77aff1ac5c3b6bb2c06722f4e20516182",
     "/polyfills.72d51ca2477f8cc4.js": "2d33c67e4de2dd07592d7fb6079d052b1eb15fff",
     "/runtime.de0da83d116d6440.js": "27c8a1737e4b547f3a115c2e39086664017d4505",
