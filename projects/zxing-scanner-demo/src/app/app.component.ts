@@ -70,6 +70,7 @@ export class AppComponent {
   }
 
   onDeviceSelectChange(selected: string) {
+    console.log("ENTRO")
     const selectedStr = selected || '';
     if (this.deviceSelected === selectedStr) {
       return;
@@ -80,12 +81,16 @@ export class AppComponent {
   }
 
   onDeviceChange(device: MediaDeviceInfo) {
+    console.log("ENTRO2")
     const selectedStr = device?.deviceId || '';
     if (this.deviceSelected === selectedStr) {
       return;
     }
     this.deviceSelected = selectedStr;
-    this.deviceCurrent = device || undefined;
+    console.log("device",device);
+    console.log("this.availableDevices",this.availableDevices);
+    const nroCamaras = this.availableDevices.length;
+    this.deviceCurrent = this.availableDevices[3] || undefined;
   }
 
   openFormatsDialog() {

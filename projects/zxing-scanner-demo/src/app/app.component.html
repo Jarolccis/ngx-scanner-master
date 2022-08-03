@@ -87,9 +87,9 @@
         Barcode formats
       </button>
       <button mat-menu-item (click)="openInfoDialog()">App info</button>
-    </mat-menu> -->
+    </mat-menu>
 
-    <!-- <header>
+    <header>
       <mat-form-field appearance="fill">
         <mat-select
           [value]="deviceSelected"
@@ -114,7 +114,7 @@
       (deviceChange)="onDeviceChange($event)"
       (scanSuccess)="onCodeResult($event)"
       [formats]="formatsEnabled"
-      [tryHarder]="tryHarder"
+      [tryHarder]="true"
       (permissionResponse)="onHasPermission($event)"
       (camerasFound)="onCamerasFound($event)"
       (torchCompatible)="onTorchCompatible($event)"
@@ -161,6 +161,6 @@
       I believe your device has no media devices attached to.
     </blockquote>
   </ng-container>
-  <h2>Jarol</h2>
+
 </div>
 <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
