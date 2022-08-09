@@ -7,6 +7,7 @@ import { AppInfoDialogComponent } from './app-info-dialog/app-info-dialog.compon
 import { FormControl } from '@angular/forms';
 import { SearchService } from './services/search.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -29,6 +30,8 @@ export class AppComponent {
   msg='';
   msgHeader='';
   isMsg=false;
+  tienda:any;
+  descTienda:any;
 
   formatsEnabled: BarcodeFormat[] = [
     BarcodeFormat.CODE_128,
@@ -49,8 +52,21 @@ export class AppComponent {
   constructor(
     private readonly _dialog: MatDialog,
     private searchService: SearchService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private route: ActivatedRoute,
   ) {}
+
+
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((params) => {
+this.tienda = params.tienda;
+this.descTienda = params.desc
+console.log('this.descTienda ',this.descTienda);
+      console.log(params.tienda);
+    })
+
+  }
+
 
   clearResult(): void {
     this.qrResultString = null;
@@ -136,9 +152,15 @@ export class AppComponent {
   searchProduct() {
     this.isLoading = true;
     this.spinner.show();
-    this.searchService.searchProducts$('124', this.search.value).subscribe(
+    let codTienda = this.tienda===undefined?'124':this.tienda;
+    this.descTienda= this.descTienda===undefined?'Tottus Jockey Plaza':this.descTienda;
+   
+    console.log("thius.tienda",this.tienda);
+    console.log("codTienda",codTienda);
+    this.searchService.searchProducts$(codTienda, this.search.value).subscribe(
       (res) => {
         try {
+          this.descTienda=this.descTienda.replace(/([a-z])([A-Z])/g, '$1 $2')
           console.log('RESPIETA');
           console.log('res', res);
         

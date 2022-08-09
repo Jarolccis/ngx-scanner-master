@@ -51,9 +51,11 @@
     </button>
   </div> -->
   <br />
-  <div  class="border rounded text-center titleResult pt-2"  *ngIf="isResult && isMsg" style="background-color: #F5F5F5;" >
+  <div  class="border rounded text-start titleResult pt-2 px   -3"  *ngIf="isResult && isMsg" style="background-color: #F5F5F5;" >
     <p class="card-title titleCard"> <strong> {{ nameProduct }}</strong>  </p>
     <p class="card-title titleCard"> MARCA {{ marca }}  </p>
+    <p class="card-title titleCard"> <strong> Tienda:</strong>  {{ descTienda }}  </p>
+    
     <p class="card-title titleCard"*ngIf="isPriceEQ"> <strong> Precio:</strong> S/{{ precio }}  </p>
     <p class="card-title titleCard"*ngIf="!isPriceEQ"> <strong> Precio Oferta:</strong> S/{{ this.precioCRM }}  </p>
     <p class="card-title titleCard"*ngIf="!isPriceEQ"> <strong> Precio Regular:</strong> S/{{ precio }}  </p>
@@ -141,7 +143,7 @@
 
   <ng-container *ngIf="hasPermission === false">
     <h2 class="subtitle">
-      Actualiza esta página y permítenos utilizar tu cámara para escanear el código de barras del producto
+      Puedes cambiar los permisos de cámara en la configuración de privacidad de tu navegador.
       <br/>
       <br/>
       <img src="https://i.ytimg.com/vi/w6geNk3QnBQ/maxresdefault.jpg"  style="width: 100%;">

@@ -13,6 +13,8 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgxSpinnerModule } from "ngx-spinner";
+import { AppRoutingModule } from './app-routing.module';
+
 
 
 
@@ -21,6 +23,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
         // Angular
         CommonModule,
         BrowserModule,
+        AppRoutingModule,
         ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
         // Local
         AppUiModule,
